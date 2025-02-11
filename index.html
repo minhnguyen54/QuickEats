@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickEats - Order Food Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>QuickEats - Order Your Favorite Food</header>
+    <div class="tabs">
+        <div class="tab" onclick="showMenu('restaurant1')">Restaurant 1</div>
+        <div class="tab" onclick="showMenu('restaurant2')">Restaurant 2</div>
+        <div class="tab" onclick="showMenu('restaurant3')">Restaurant 3</div>
+    </div>
+    <div class="container">
+        <div id="restaurant1" class="menu active">
+            <h2>Restaurant 1 Menu</h2>
+            <div class="menu-item"><span>Food Item 1 - $10</span><button
+                    onclick="addToCart('Food Item 1', 10)">Add</button></div>
+            <div class="menu-item"><span>Food Item 2 - $12</span><button
+                    onclick="addToCart('Food Item 2', 12)">Add</button></div>
+        </div>
+        <div id="restaurant2" class="menu">
+            <h2>Restaurant 2 Menu</h2>
+            <div class="menu-item"><span>Food Item A - $8</span><button
+                    onclick="addToCart('Food Item A', 8)">Add</button></div>
+            <div class="menu-item"><span>Food Item B - $15</span><button
+                    onclick="addToCart('Food Item B', 15)">Add</button></div>
+        </div>
+        <div id="restaurant3" class="menu">
+            <h2>Restaurant 3 Menu</h2>
+            <div class="menu-item"><span>Food Item X - $14</span><button
+                    onclick="addToCart('Food Item X', 14)">Add</button></div>
+            <div class="menu-item"><span>Food Item Y - $18</span><button
+                    onclick="addToCart('Food Item Y', 18)">Add</button></div>
+        </div>
+        <div class="cart">
+            <h2>Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: $<span id="total">0</span></p>
+            <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+    <script>
+        function showMenu(id) {
+            document.querySelectorAll('.menu').forEach(menu => menu.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+        let cart = [];
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCart();
+        }
+        function updateCart() {
+            let cartList = document.getElementById('cart-items');
+            let total = 0;
+            cartList.innerHTML = '';
+            cart.forEach(c => {
+                let li = document.createElement('li');
+                li.textContent = `${c.item} - $${c.price}`;
+                cartList.appendChild(li);
+                total += c.price;
+            });
+            document.getElementById('total').textContent = total;
+        }
+        function checkout() {
+            alert('Proceeding to payment page...');
+        }
+    </script>
+</body>
+
+</html>
+                                                               
