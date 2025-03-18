@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - QuickEats</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #1abc9c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #16a085;
+        }
+        .order-summary {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .order-summary h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .order-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        .order-summary li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>QuickEats - Checkout</header>
+    <div class="container">
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <ul id="checkout-items"></ul>
+            <p>Total: $<span id="checkout-total">0</span></p>
+        </div>
+        <h2>Payment and Delivery Information</h2>
+        <form id="checkout-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Delivery Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" required>
+
+            <label for="expiry">Expiry Date</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" required>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+    <footer>QuickEats &copy; 2025</footer>
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = localStorage.getItem('total') || '0';
+
+        const checkoutItems = document.getElementById('checkout-items');
+        const checkoutTotal = document.getElementById('checkout-total');
+
+        checkoutItems.innerHTML = '';
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${item.item} - $${item.price.toFixed(2)} 
+                <span>Qty: ${item.quantity}</span>
+            `;
+            checkoutItems.appendChild(li);
+        });
+        checkoutTotal.textContent = total;
+
+        const checkoutForm = document.getElementById('checkout-form');
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(checkoutForm);
+            const order = {
+                name: formData.get('name'),
+                address: formData.get('address'),
+                cardNumber: formData.get('card-number'),
+                expiry: formData.get('expiry'),
+                cvv: formData.get('cvv'),
+                cart: cart,
+                total: total,
+            };
+
+            localStorage.setItem('order', JSON.stringify(order));
+
+            alert('Order placed successfully!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

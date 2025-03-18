@@ -1,76 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickEats - Order Food Online</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickEats - Order Food Online</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
 </head>
-
 <body>
-    <header>QuickEats - Order Your Favorite Food</header>
-    <div class="tabs">
-        <div class="tab" onclick="showMenu('restaurant1')">Restaurant 1</div>
-        <div class="tab" onclick="showMenu('restaurant2')">Restaurant 2</div>
-        <div class="tab" onclick="showMenu('restaurant3')">Restaurant 3</div>
+  <nav>
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('restaurants')">Restaurants</a>
+    <a href="#" onclick="showSection('profile')">Profile</a>
+    <a href="#" onclick="showSection('contact')">Contact</a>
+    <a href="#" onclick="toggleCart()">Cart</a>
+  </nav>
+  <div class="page-container">
+    <div class="main-content">
+      <div id="home" class="section active">
+        <div class="home-section">
+          <h2>Welcome to QuickEats</h2>
+          <p>Order your favorite food and get it delivered by drone!</p>
+          <div class="featured-section">
+            <h2>Featured Restaurants</h2>
+            <div class="carousel-container">
+              <button class="carousel-btn left" onclick="prevSlide()">❮</button>
+              <div class="carousel">
+                <div class="carousel-inner" id="carousel-inner"></div>
+              </div>
+              <button class="carousel-btn right" onclick="nextSlide()">❯</button>
+            </div>
+          </div>
+          <button onclick="showSection('restaurants')">Explore Restaurants</button>
+        </div>
+        <div class="features-section">
+          <div class="features-grid">
+            <div class="feature-card">
+              <img src="https://grist.org/wp-content/uploads/2015/11/organic.jpg?quality=75&strip=all&w=1200" alt="Feature 1">
+              <h3>Fresh & Organic</h3>
+              <p>We deliver high-quality, organic food directly from the best restaurants.</p>
+              <button>Read More</button>
+            </div>
+            <div class="feature-card">
+              <img src="https://modernrestaurantmanagement.com/assets/media/2020/07/Getty_526233045-1200x655.jpg" alt="Feature 2">
+              <h3>Drone Delivery</h3>
+              <p>Enjoy fast and free delivery with our advanced drone technology.</p>
+              <button>Read More</button>
+            </div>
+            <div class="feature-card">
+              <img src="https://cdn.vectorstock.com/i/500p/33/79/100-secure-grunge-badge-with-a-check-mark-label-vector-51493379.jpg" alt="Feature 3">
+              <h3>Easy Payments</h3>
+              <p>Secure and hassle-free payment options for a seamless experience.</p>
+              <button>Read More</button>
+            </div>
+          </div>
+        </div>
+        <div class="reviews">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>John D.</h4>
+            <p>"QuickEats is amazing! The food arrived in under 20 minutes, and it was still hot. Highly recommend!"</p>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>Sarah L.</h4>
+            <p>"The service is fantastic, and the delivery is always on time. I love the variety of restaurants available."</p>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>Mike T.</h4>
+            <p>"The drone delivery is so cool! The food is always fresh, and the app is super easy to use."</p>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>Emily R.</h4>
+            <p>"I’ve never had a bad experience with QuickEats. The delivery is fast, and the food is delicious!"</p>
+          </div>
+        </div>
+      </div>
+      <div id="restaurants" class="section">
+        <div class="filter-sidebar">
+          <h3>Filter By</h3>
+          <div class="filter-section">
+            <h4>Cuisine</h4>
+            <label><input type="checkbox" class="filter-checkbox" value="American" onclick="filterRestaurants()"> American</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Bakery" onclick="filterRestaurants()"> Bakery</label>
+            <label><input type="checkbox" class="filter-checkbox" value="BBQ" onclick="filterRestaurants()"> BBQ</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Breakfast" onclick="filterRestaurants()"> Breakfast</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Burgers" onclick="filterRestaurants()"> Burgers</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Burritos" onclick="filterRestaurants()"> Burritos</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Cafe" onclick="filterRestaurants()"> Cafe</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Chicken" onclick="filterRestaurants()"> Chicken</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Coffee" onclick="filterRestaurants()"> Coffee</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Diners" onclick="filterRestaurants()"> Diners</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Healthy" onclick="filterRestaurants()"> Healthy</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Italian" onclick="filterRestaurants()"> Italian</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Mediterranean" onclick="filterRestaurants()"> Mediterranean</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Mexican" onclick="filterRestaurants()"> Mexican</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Pizza" onclick="filterRestaurants()"> Pizza</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Salads" onclick="filterRestaurants()"> Salads</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Sandwiches" onclick="filterRestaurants()"> Sandwiches</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Smoked Meats" onclick="filterRestaurants()"> Smoked Meats</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Soup" onclick="filterRestaurants()"> Soup</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Subs" onclick="filterRestaurants()"> Subs</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Tea" onclick="filterRestaurants()"> Tea</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Vegan" onclick="filterRestaurants()"> Vegan</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Vegetarian" onclick="filterRestaurants()"> Vegetarian</label>
+            <label><input type="checkbox" class="filter-checkbox" value="Wings" onclick="filterRestaurants()"> Wings</label>
+          </div>                  
+          <div class="filter-section">
+            <h4>Rating</h4>
+            <label><input type="checkbox" class="filter-rating" value="4" onclick="filterRestaurants()"> 4+ Stars</label>
+            <label><input type="checkbox" class="filter-rating" value="3" onclick="filterRestaurants()"> 3+ Stars</label>
+            <label><input type="checkbox" class="filter-rating" value="2" onclick="filterRestaurants()"> 2+ Stars</label>
+          </div>
+        </div>
+        <div class="main-content">
+          <div class="search-filter">
+            <input type="text" placeholder="Search for restaurants..." oninput="searchRestaurants()">
+            <select id="sort-by" onchange="sortRestaurants()">
+              <option value="default">Default</option>
+              <option value="price-low">Price (Lowest to Highest)</option>
+              <option value="price-high">Price (Highest to Lowest)</option>
+              <option value="name-asc">Name (A → Z)</option>
+              <option value="name-desc">Name (Z → A)</option>
+              <option value="rating-asc">Rating (Lowest to Highest)</option>
+              <option value="rating-desc">Rating (Highest to Lowest)</option>
+            </select>
+          </div>
+          <div class="restaurant-grid" id="restaurant-grid"></div>
+        </div>
+      </div>
+      <div id="profile" class="section">
+        <div class="auth-forms" id="login-form">
+          <h2>Login</h2>
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button onclick="login()">Login</button>
+          <p>Don't have an account? <a href="#" onclick="showAuthForm('register-form')">Register</a></p>
+        </div>
+        <div class="auth-forms" id="register-form">
+          <h2>Register</h2>
+          <input type="text" placeholder="Name">
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button onclick="register()">Register</button>
+          <p>Already have an account? <a href="#" onclick="showAuthForm('login-form')">Login</a></p>
+        </div>
+        <div class="profile-info" id="profile-info" style="display: none;">
+          <h2>Profile</h2>
+          <p>Name: <span id="profile-name"></span></p>
+          <p>Email: <span id="profile-email"></span></p>
+          <h3>Order History</h3>
+          <ul id="order-history"></ul>
+          <h3>Saved Addresses</h3>
+          <ul id="saved-addresses"></ul>
+          <h3>Payment Methods</h3>
+          <ul id="payment-methods"></ul>
+        </div>
+      </div>
+      <div id="contact" class="section">
+        <h2>Contact Us</h2>
+        <p>Have questions? Fill out the form below and we'll get back to you.</p>
+        <form id="contact-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Your Name" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Your Email" required>
+          <label for="message">Message:</label>
+          <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div id="contact-success" style="display: none; color: green; margin-top: 10px;">Message sent successfully! We will contact you soon.</div>
+      </div>
     </div>
-    <div class="container">
-        <div id="restaurant1" class="menu active">
-            <h2>Restaurant 1 Menu</h2>
-            <div class="menu-item"><span>Food Item 1 - $10</span><button
-                    onclick="addToCart('Food Item 1', 10)">Add</button></div>
-            <div class="menu-item"><span>Food Item 2 - $12</span><button
-                    onclick="addToCart('Food Item 2', 12)">Add</button></div>
-        </div>
-        <div id="restaurant2" class="menu">
-            <h2>Restaurant 2 Menu</h2>
-            <div class="menu-item"><span>Food Item A - $8</span><button
-                    onclick="addToCart('Food Item A', 8)">Add</button></div>
-            <div class="menu-item"><span>Food Item B - $15</span><button
-                    onclick="addToCart('Food Item B', 15)">Add</button></div>
-        </div>
-        <div id="restaurant3" class="menu">
-            <h2>Restaurant 3 Menu</h2>
-            <div class="menu-item"><span>Food Item X - $14</span><button
-                    onclick="addToCart('Food Item X', 14)">Add</button></div>
-            <div class="menu-item"><span>Food Item Y - $18</span><button
-                    onclick="addToCart('Food Item Y', 18)">Add</button></div>
-        </div>
-        <div class="cart">
-            <h2>Cart</h2>
-            <ul id="cart-items"></ul>
-            <p>Total: $<span id="total">0</span></p>
-            <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
-        </div>
+    <div class="cart-sidebar">
+      <button class="close-cart" onclick="toggleCart()">✖</button>
+      <h2>Cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total: $<span id="total">0</span></p>
+      <button class="checkout" onclick="redirectToCheckout()">Proceed to Checkout</button>
     </div>
-    <script>
-        function showMenu(id) {
-            document.querySelectorAll('.menu').forEach(menu => menu.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-        let cart = [];
-        function addToCart(item, price) {
-            cart.push({ item, price });
-            updateCart();
-        }
-        function updateCart() {
-            let cartList = document.getElementById('cart-items');
-            let total = 0;
-            cartList.innerHTML = '';
-            cart.forEach(c => {
-                let li = document.createElement('li');
-                li.textContent = `${c.item} - $${c.price}`;
-                cartList.appendChild(li);
-                total += c.price;
-            });
-            document.getElementById('total').textContent = total;
-        }
-        function checkout() {
-            alert('Proceeding to payment page...');
-        }
-    </script>
+  </div>
+  <footer>QuickEats © 2025</footer>
 </body>
-
 </html>
-                                                               
